@@ -27,7 +27,7 @@ export const orthographyCheckUseCase = async (
 
           {
             userScore: number,
-            errors: string[], // ['error' -> 'solución']
+            errors: string[], // ['error -> solución']
             message: string, // Usa emojis y texto para felicitar al usuario
           }
         `,
@@ -42,7 +42,8 @@ export const orthographyCheckUseCase = async (
     temperature: 0.3,
   });
 
-  console.log(completion);
+  // console.log(completion);
+  const jsonResp = JSON.parse(completion.choices[0].message.content);
 
-  return completion.choices[0];
+  return jsonResp;
 };
