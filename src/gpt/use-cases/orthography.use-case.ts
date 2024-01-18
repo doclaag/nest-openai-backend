@@ -37,9 +37,12 @@ export const orthographyCheckUseCase = async (
         content: prompt,
       },
     ],
-    model: 'gpt-3.5-turbo',
-    max_tokens: 150,
+    model: 'gpt-3.5-turbo-1106',
     temperature: 0.3,
+    max_tokens: 150,
+    response_format: {
+      type: 'json_object',
+    },
   });
 
   // console.log(completion);
