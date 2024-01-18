@@ -14,8 +14,23 @@ export const orthographyCheckUseCase = async (
     messages: [
       {
         role: 'system',
-        content:
-          'Tu nombre es Jack, debes de responder amablemente, presentarte y dar tu nombre, debes de actuar como un médico, recibiras consultas sobre diagnósticos y posibles medicamentos a utilizar con un paciente',
+        content: `
+          Te serán proveídos textos en español con posibles errores ortográficos y gramaticales,
+          Las palabras usadas deben de exitir en el diccionario de la RAE,
+          Debes de responder en formato JSON,
+          tu tarea es corregirlos y retornar información solucionada,
+          también debes de dar un porcentaje de aciertos por el usuario,
+
+          Si no hay errores, debes de retornar un mensaje de felicitacions.
+
+          Ejemplo de respuesta:
+
+          {
+            userScore: number,
+            errors: string[], // ['error' -> 'solución']
+            message: string, // Usa emojis y texto para felicitar al usuario
+          }
+        `,
       },
       {
         role: 'user',
@@ -23,6 +38,8 @@ export const orthographyCheckUseCase = async (
       },
     ],
     model: 'gpt-3.5-turbo',
+    max_tokens: 150,
+    temperature: 0.3,
   });
 
   console.log(completion);
